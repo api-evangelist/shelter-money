@@ -1,0 +1,52 @@
+name: Shelter
+description: 'A consumer budgeting product ("See What''s Safe to Spend Before Payday") submitting an agent-facing
+  MCP surface. ACCESS REALITY at listing time: the declared agent base api.shelter.money/agent did not answer any
+  probe (connection failed, 2026-09-07); the served surfaces are the site, the developers page, and the public MCP
+  repository on GitHub.'
+url: https://raw.githubusercontent.com/api-evangelist/shelter-money/refs/heads/main/apis.yml
+created: '2026-09-07'
+modified: '2026-09-07'
+specificationVersion: '0.21'
+tags:
+- Personal Finance
+- Budgeting
+- Fintech
+- MCP
+apis:
+- name: Shelter MCP
+  description: Agent surface for the Shelter budgeting product. Declared base api.shelter.money/agent is recorded
+    but was unreachable at probe time; the public repository is the verifiable artifact.
+  humanURL: https://shelter.money/developers
+  baseURL: https://api.shelter.money/agent
+  tags:
+  - MCP
+  - Personal Finance
+  properties:
+  - type: Documentation
+    url: https://shelter.money/developers
+  - type: SourceCode
+    url: https://github.com/nextauralabs/shelter-mcp
+common:
+- type: Website
+  url: https://shelter.money
+maintainers:
+- FN: Shelter (Nextaura Labs)
+  url: https://shelter.money
+x-coverage:
+  state: partial
+  probed: '2026-09-07'
+  evidence:
+  - url: https://shelter.money/
+    status: 200
+  - url: https://shelter.money/zzz-control
+    status: 404
+  - url: https://shelter.money/developers
+    status: 200
+  - url: https://api.shelter.money/agent
+    status: '000'
+    note: connection failed on POST initialize, twice
+x-source:
+  via: apis.io/add 58ed6e7b, parked no_consumable_surface; listed by Kin 2026-09-07 on what is served
+  fetched: '2026-09-07'
+  note: No spec is served and none was reconstructed. When api.shelter.money answers, re-probe and harvest the real
+    thing.
