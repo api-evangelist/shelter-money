@@ -1,0 +1,29 @@
+generated: '2026-09-07'
+method: searched
+source: https://shelter.money/developers
+limit_count: 6
+limits:
+- scope: per-key (free tier)
+  window: 1 minute
+  limit: 10
+- scope: per-key (free tier)
+  window: 1 day
+  limit: 100
+- scope: per-key (free tier) — Guardian asks (shelter_ask)
+  window: 1 day
+  limit: 5
+- scope: per-key (premium tier)
+  window: 1 minute
+  limit: 60
+- scope: per-key (premium tier)
+  window: 1 day
+  limit: 10000
+- scope: per-key (premium tier) — Guardian asks (shelter_ask)
+  window: 1 day
+  limit: 100
+headers: []
+note: >-
+  Limits are published on the developers page per API-key tier; premium limits come automatically
+  with a Shelter subscription. The docs do not document rate-limit response headers
+  (X-RateLimit-*/RateLimit-*/Retry-After) or the status code on exhaustion, and the Agent API host
+  (api.shelter.money) was NXDOMAIN at probe time, so the runtime signal could not be observed.

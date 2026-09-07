@@ -1,8 +1,11 @@
 name: Shelter
-description: 'A consumer budgeting product ("See What''s Safe to Spend Before Payday") submitting an agent-facing
-  MCP surface. ACCESS REALITY at listing time: the declared agent base api.shelter.money/agent did not answer any
-  probe (connection failed, 2026-09-07); the served surfaces are the site, the developers page, and the public MCP
-  repository on GitHub.'
+description: >-
+  Shelter is a read-only AI money guardian from Nextaura Labs that connects to a user's financial
+  accounts through Plaid and publishes a 30-day cash-flow forecast, safe-to-spend and affordability
+  checks, bill and subscription detection, and low-balance alerts. Its agent surface is an official
+  open-source MCP server (npm @shelter.money/mcp, ten read-only tools with an MCP-registry
+  server.json) backed by a scoped-API-key Agent API; the documented API host api.shelter.money was
+  NXDOMAIN at probe time (2026-09-07), so the live API could not be reached.
 url: https://raw.githubusercontent.com/api-evangelist/shelter-money/refs/heads/main/apis.yml
 created: '2026-09-07'
 modified: '2026-09-07'
@@ -12,10 +15,17 @@ tags:
 - Budgeting
 - Fintech
 - MCP
+- AI Agents
+- Cash Flow Forecasting
 apis:
 - name: Shelter MCP
-  description: Agent surface for the Shelter budgeting product. Declared base api.shelter.money/agent is recorded
-    but was unreachable at probe time; the public repository is the verifiable artifact.
+  description: >-
+    Official read-only MCP agent surface for the Shelter budgeting product — ten tools covering
+    status, runway, forecast, alerts, opportunities, context, affordability, coaching, and Guardian
+    Q&A, shipped as the open-source npm package @shelter.money/mcp (stdio transport) and
+    authenticated with a scoped API key. The declared backing base https://api.shelter.money/agent
+    is the provider's own documented default (SHELTER_API_URL), but the host did not resolve
+    (NXDOMAIN) when probed on 2026-09-07.
   humanURL: https://shelter.money/developers
   baseURL: https://api.shelter.money/agent
   tags:
@@ -26,27 +36,88 @@ apis:
     url: https://shelter.money/developers
   - type: SourceCode
     url: https://github.com/nextauralabs/shelter-mcp
+  - type: MCPServer
+    url: mcp/shelter-money-mcp.yml
+  - type: Authentication
+    url: authentication/shelter-money-authentication.yml
+  - type: RateLimits
+    url: rate-limits/shelter-money-rate-limits.yml
+  - type: Conventions
+    url: conventions/shelter-money-conventions.yml
+  - type: Conformance
+    url: conformance/shelter-money-conformance.yml
 common:
 - type: Website
   url: https://shelter.money
+- type: DeveloperPortal
+  url: https://shelter.money/developers
+- type: WellKnown
+  url: well-known/shelter-money-well-known.yml
+- type: SecurityTxt
+  url: well-known/shelter-money-security.txt
+- type: LLMsTxt
+  url: llms/shelter-money-llms.txt
+- type: Security
+  url: security/shelter-money-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/shelter-money-vulnerability-disclosure.yml
+- type: TrustCenter
+  url: security/shelter-money-trust-center.yml
+- type: DomainSecurity
+  url: security/shelter-money-domain-security.yml
+- type: Packages
+  url: packages/shelter-money-packages.yml
+- type: SDKs
+  url: packages/shelter-money-packages.yml
+- type: Plans
+  url: plans/shelter-money-plans-pricing.yml
+- type: Pricing
+  url: https://shelter.money/pricing
+- type: Support
+  url: https://shelter.money/support
+- type: Blog
+  url: https://shelter.money/blog
+- type: PrivacyPolicy
+  url: https://shelter.money/privacy
+- type: TermsOfService
+  url: https://shelter.money/terms
+- type: SignUp
+  url: https://shelter.money/sign-up
+- type: GitHubOrganization
+  url: https://github.com/nextauralabs
 maintainers:
 - FN: Shelter (Nextaura Labs)
   url: https://shelter.money
+  email: support@shelter.money
 x-coverage:
-  state: partial
-  probed: '2026-09-07'
+  state: covered
+  detail: >-
+    Real provider artifacts were found and saved — security.txt, llms.txt, the official MCP server
+    (npm @shelter.money/mcp 1.0.7 with an MCP-registry server.json), published rate limits,
+    pricing, and auth docs; the one wall remaining is that the documented Agent API host
+    api.shelter.money is NXDOMAIN, so no live contract could be harvested or introspected.
   evidence:
-  - url: https://shelter.money/
+  - url: https://shelter.money/.well-known/security.txt
     status: 200
-  - url: https://shelter.money/zzz-control
-    status: 404
+  - url: https://shelter.money/llms.txt
+    status: 200
   - url: https://shelter.money/developers
     status: 200
+  - url: https://registry.npmjs.org/@shelter.money%2fmcp
+    status: 200
   - url: https://api.shelter.money/agent
-    status: '000'
-    note: connection failed on POST initialize, twice
+    status: 0
+    note: NXDOMAIN — no A/AAAA/CNAME record, verified against 1.1.1.1
+  checked: '2026-09-07'
 x-source:
   via: apis.io/add 58ed6e7b, parked no_consumable_surface; listed by Kin 2026-09-07 on what is served
   fetched: '2026-09-07'
-  note: No spec is served and none was reconstructed. When api.shelter.money answers, re-probe and harvest the real
-    thing.
+  note: >-
+    No OpenAPI/spec is served and none was reconstructed. The MCP tool surface was read from the
+    provider's published sources (github.com/nextauralabs/shelter-mcp). When api.shelter.money
+    answers, re-probe and harvest the real thing.
+x-enrichment:
+  date: '2026-09-07'
+  status: enriched
+  artifacts_added: 13
+  pass: local-v3

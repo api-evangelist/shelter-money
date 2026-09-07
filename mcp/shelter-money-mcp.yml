@@ -1,0 +1,127 @@
+generated: '2026-09-07'
+method: searched
+source: https://github.com/nextauralabs/shelter-mcp
+status: official
+name: Shelter MCP Server
+description: >-
+  Official, open-source (MIT) read-only MCP server connecting Claude, Codex, Cursor and other
+  MCP-compatible agents to scoped financial context from a user's own Shelter account —
+  forecasts, runway, alerts, opportunities, and affordability guidance. It cannot move money
+  and never sees Plaid credentials. Without a SHELTER_API_KEY the server still exposes its tool
+  definitions but fails closed, returning suppressed responses with no financial values.
+deployment:
+  mode: local-stdio
+  install: npx -y @shelter.money/mcp
+  package: https://www.npmjs.com/package/@shelter.money/mcp
+  auth: api-key
+  verified: searched
+  note: >-
+    Stdio transport per the provider's own server.json MCP-registry manifest
+    (io.github.nextauralabs/shelter, version 1.0.7); a local HTTP mode (src/bin/shelter-mcp-http.ts,
+    default PORT 3100) also exists but binds locally — no hosted remote MCP endpoint is published.
+    The adapter calls the Shelter Agent API at https://api.shelter.money/agent (SHELTER_API_URL
+    default), authenticated with an X-Shelter-Key header. That host was NXDOMAIN at probe time
+    (2026-09-07, verified against 1.1.1.1), so the backing API could not be reached or introspected.
+registry_manifests:
+- kind: mcp-registry server.json
+  url: https://raw.githubusercontent.com/nextauralabs/shelter-mcp/main/server.json
+  name: io.github.nextauralabs/shelter
+  schema: https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json
+- kind: smithery.yaml
+  url: https://raw.githubusercontent.com/nextauralabs/shelter-mcp/main/smithery.yaml
+environment:
+- name: SHELTER_API_KEY
+  required: true
+  secret: true
+  description: Scoped Shelter API key created at https://shelter.money/developer; financial values are suppressed without one.
+- name: SHELTER_API_URL
+  required: false
+  description: 'Custom API base URL (default: https://api.shelter.money/agent).'
+- name: PORT
+  required: false
+  description: Local HTTP port for HTTP mode only (default 3100).
+tools:
+- name: shelter_status
+  title: Financial Status
+  description: Get a snapshot of your financial status — safe-to-spend, balances, upcoming bills, health score.
+  input: {refresh: 'boolean, optional — force a fresh calculation instead of cached data'}
+  backing: GET /v1/status
+  annotations: {readOnlyHint: true}
+- name: shelter_runway
+  title: Cash Runway
+  description: How many days until you run out of money — daily budget, next payday, safe-to-spend.
+  input: {includeBreakdown: 'boolean, optional — day-by-day breakdown of projected spending'}
+  backing: GET /v1/runway
+  annotations: {readOnlyHint: true}
+- name: shelter_forecast
+  title: Cash Forecast
+  description: Verified 14-day view of Shelter's canonical 30-day balance forecast.
+  input: {days: 'literal 14, optional'}
+  backing: GET /v1/forecast
+  annotations: {readOnlyHint: true, idempotentHint: true}
+- name: shelter_alerts
+  title: Financial Alerts
+  description: Get active financial alerts — unusual spending, upcoming bills, low balance warnings.
+  input: {severity: 'enum info|warning|critical, optional'}
+  backing: GET /v1/alerts
+  annotations: {readOnlyHint: true}
+- name: shelter_opportunities
+  title: Savings Opportunities
+  description: Find savings opportunities — unused subscriptions, negotiable bills, spending patterns to optimize.
+  input: {category: 'enum subscriptions|bills|spending|negotiation, optional'}
+  backing: GET /v1/opportunities
+  annotations: {readOnlyHint: true}
+- name: shelter_context
+  title: Financial Context
+  description: Get a natural-language summary of the user's financial situation for use as conversation context.
+  input: {detail: 'enum summary|full, optional'}
+  backing: GET /v1/context
+  annotations: {readOnlyHint: true}
+- name: shelter_affordability
+  title: Affordability Check
+  description: Check if you can afford a specific purchase — impact on safe-to-spend, recommendation.
+  input:
+    amount: number, required — major-unit amount of the purchase
+    currency: string, required — uppercase ISO 4217 code (e.g. CAD, USD)
+    description: string, required — what the purchase is for
+  backing: POST /v1/affordability
+  annotations: {readOnlyHint: true}
+- name: shelter_coach_daily
+  title: Daily Coach Tip
+  description: Get today's personalized financial coaching tip based on your recent spending.
+  input: {category: 'enum spending|saving|debt|general, optional'}
+  backing: GET /v1/coach/daily
+  annotations: {readOnlyHint: true}
+- name: shelter_coach_advice
+  title: Coach Advice
+  description: Get targeted financial advice on a specific topic — debt, savings, bills, subscriptions, or negotiation.
+  input: {topic: 'enum debt|savings|bills|subscriptions|negotiation|general, required'}
+  backing: GET /v1/coach/advice
+  annotations: {readOnlyHint: true}
+- name: shelter_ask
+  title: Ask Guardian AI
+  description: Ask Guardian AI any question about your finances — spending, bills, trends, or advice.
+  input: {question: 'string, required — natural-language question about your finances'}
+  backing: POST /v1/ask
+  annotations: {readOnlyHint: true}
+prompts:
+- financial-checkup
+- spending-review
+- plan-a-purchase
+rate_limits:
+  free: 10 requests/minute, 100 requests/day, 5 Guardian asks/day
+  premium: 60 requests/minute, 10,000 requests/day, 100 Guardian asks/day
+x-evidence:
+  fetched: '2026-09-07'
+  sources:
+  - url: https://github.com/nextauralabs/shelter-mcp
+    status: 200
+  - url: https://registry.npmjs.org/@shelter.money%2fmcp
+    status: 200
+    note: latest 1.0.7, published 2026-08-19
+  - url: https://shelter.money/developers
+    status: 200
+  - url: https://api.shelter.money/agent
+    status: 0
+    note: NXDOMAIN at probe time; tools/list could not be introspected live — tool list and
+      input schemas read from the provider's published TypeScript sources (src/tools/*.ts)

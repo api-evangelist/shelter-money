@@ -1,0 +1,59 @@
+# Shelter
+
+> A read-only AI money guardian that forecasts the next 30 days and explains cash-flow risk before payday.
+
+Last reviewed: 2026-08-23
+
+## Direct answer
+
+Shelter connects to supported financial accounts through Plaid with read-only access. It combines balances, income timing, recurring bills, debt payments, subscriptions, and observed spending to publish a 30-day cash-flow forecast. Guardian uses that forecast to explain what is already spoken for, when the balance is likely to be lowest, and one action the user can consider.
+
+Shelter cannot move, hold, withdraw, or spend money. It does not make payments, cancel subscriptions, or negotiate bills.
+
+## Core capabilities
+
+- Versioned 30-day daily-balance forecast
+- Safe-to-spend and before-purchase checks
+- Recurring bill and subscription detection
+- Predicted low-balance and cash-shortfall alerts
+- Debt-payment planning that checks the forecast first
+- Guardian chat and proactive updates, including optional Telegram delivery
+
+## Important limitations
+
+- Forecasts are estimates, not guarantees or individualized financial advice.
+- New transactions, delayed income, changed due dates, missing accounts, and sync interruptions can change an answer.
+- When required money data is missing, stale, or incompatible, Shelter suppresses the forecast-dependent answer instead of treating missing values as zero.
+- Users should confirm their current balance and provider terms before making a payment.
+
+## Pricing
+
+- Monthly: $9.99/month
+- Annual: $79/year
+- Web trial: 14 days; card required; billing begins after the trial unless canceled
+
+## Primary Shelter sources
+
+- Forecast methodology: https://shelter.money/forecast-methodology
+- Reviews and trust: https://shelter.money/trust
+- Security: https://shelter.money/security
+- Editorial policy: https://shelter.money/editorial-policy
+- Privacy: https://shelter.money/privacy
+- Pricing: https://shelter.money/pricing
+- About the publisher: https://shelter.money/about
+
+## Product and resource links
+
+- Website: https://shelter.money
+- App Store: https://shelter.money/download?platform=ios&source=llms&surface=llms
+- Google Play: https://shelter.money/download?platform=android&source=llms&surface=llms
+- Features: https://shelter.money/features
+- For AI agents: https://shelter.money/developers
+- Open-source MCP adapter: https://github.com/nextauralabs/shelter-mcp
+- Cash flow forecasting: https://shelter.money/cash-flow-forecasting-app
+- Overdraft alerts: https://shelter.money/overdraft-alert-app
+- Safe-before-payday worksheet: https://shelter.money/safe-before-payday-checklist
+- Safe-to-spend calculator: https://shelter.money/safe-to-spend-calculator
+- Blog: https://shelter.money/blog
+- Support and corrections: https://shelter.money/support
+- Full reference: https://shelter.money/llms-full.txt

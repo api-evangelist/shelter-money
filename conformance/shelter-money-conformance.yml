@@ -1,0 +1,25 @@
+generated: '2026-09-07'
+method: derived
+source: https://github.com/nextauralabs/shelter-mcp
+conformance:
+- id: mcp
+  conforms: true
+  evidence: >-
+    Official server built on @modelcontextprotocol/sdk with a published MCP-registry server.json
+    (io.github.nextauralabs/shelter, schema
+    https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json) and a
+    smithery.yaml; distributed as npm @shelter.money/mcp 1.0.7.
+- id: rfc9116-security-txt
+  conforms: true
+  evidence: >-
+    https://shelter.money/.well-known/security.txt served (HTTP 200, 2026-09-07) with Contact,
+    Expires, Preferred-Languages, Canonical, and Policy fields.
+- id: oauth2
+  conforms: false
+  evidence: API keys (X-Shelter-Key) are the only documented scheme; no OAuth endpoints or well-known authorization-server metadata are served.
+- id: fdx
+  conforms: false
+  evidence: >-
+    No Financial Data Exchange conformance is claimed anywhere on the site or in the MCP
+    sources; account connectivity is consumed from Plaid rather than served. Recorded as an
+    honest absence for the personal-finance domain, not a penalty.

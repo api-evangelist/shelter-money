@@ -1,0 +1,41 @@
+generated: '2026-09-07'
+method: probed
+source: live probes of https://shelter.money and https://api.shelter.money (declared API host)
+note: >-
+  shelter.money serves a real RFC 9116 security.txt (saved verbatim). All other well-known
+  paths on shelter.money return the Next.js 404 page. The declared API host api.shelter.money
+  is NXDOMAIN (no A/AAAA/CNAME record, verified against 1.1.1.1 on 2026-09-07), so every probe
+  against it failed at the connection level (status 0).
+hosts:
+- host: shelter.money
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: shelter-money-security.txt
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+- host: api.shelter.money
+  note: NXDOMAIN — host does not resolve; no documents probeable
+  documents:
+  - path: /.well-known/security.txt
+    status: 0
+  - path: /.well-known/oauth-authorization-server
+    status: 0
+  - path: /.well-known/oauth-protected-resource
+    status: 0
+  - path: /.well-known/agent-card.json
+    status: 0

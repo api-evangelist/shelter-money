@@ -1,0 +1,27 @@
+generated: '2026-09-07'
+method: searched
+source: https://shelter.money/developers
+docs: https://shelter.money/developers
+schemes:
+- type: apiKey
+  in: header
+  name: X-Shelter-Key
+  description: >-
+    Scoped Shelter API key, created and revoked at https://shelter.money/developer. Keys are
+    read-only by default, prefixed wv_, stored by Shelter as SHA-256 hashes at rest, and shown
+    only once at creation (only the prefix displays afterward). In the official MCP server the
+    key is supplied via the SHELTER_API_KEY environment variable and sent as the X-Shelter-Key
+    request header (per the published client source, src/client.ts).
+notes:
+- No OAuth flows, OpenID Connect, or mutual TLS are documented; API keys are the only scheme.
+- End-user identity comes solely from the scoped key; the MCP package holds no Plaid tokens or
+  bank credentials.
+- Without a key the official MCP server fails closed — tool definitions load but every response
+  is suppressed with reasonCodes [MISSING_SHELTER_API_KEY] and no financial values.
+evidence:
+- url: https://shelter.money/developers
+  status: 200
+- url: https://raw.githubusercontent.com/nextauralabs/shelter-mcp/main/src/client.ts
+  status: 200
+- url: https://raw.githubusercontent.com/nextauralabs/shelter-mcp/main/SECURITY.md
+  status: 200

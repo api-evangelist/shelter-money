@@ -1,0 +1,20 @@
+generated: '2026-09-07'
+method: searched
+source: https://registry.npmjs.org/@shelter.money%2fmcp
+packages:
+- name: '@shelter.money/mcp'
+  registry: npm
+  url: https://www.npmjs.com/package/@shelter.money/mcp
+  repository: https://github.com/nextauralabs/shelter-mcp
+  language: TypeScript
+  official: true
+  license: MIT
+  version: 1.0.7
+  published: '2026-08-19'
+  bin: shelter-mcp
+  description: Connect AI agents to scoped financial context from your own Shelter account
+  note: >-
+    Official read-only MCP server / agent client for the Shelter Agent API. First published
+    2026-08-19 (three releases 1.0.5-1.0.7 same day); npm maintainer brian-nextaura
+    (@nextauralabs.com), matching the publisher Nextaura Labs. The only first-party package
+    found — no PyPI, RubyGems, Maven, NuGet, Go, Packagist, or crates.io client is published.

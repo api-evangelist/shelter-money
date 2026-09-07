@@ -1,0 +1,19 @@
+generated: '2026-09-07'
+method: searched
+probe: true
+source: https://shelter.money/security
+url: https://shelter.money/security
+certifications: []
+note: >-
+  CORRECTED 2026-09-07: an automated keyword probe initially credited SOC 2, ISO 27001, and
+  HIPAA from this page, but the page names them only under a "What we don't claim" section —
+  Shelter explicitly states it is NOT certified for any of them. Recorded as an honest zero.
+  The page is a genuine security-practices disclosure: Plaid read-only access tokens encrypted
+  at rest (AES-256-GCM, random IV per token), passwords delegated to Clerk (Clerk-issued JWT,
+  no stored passwords), card details held by Stripe (Shelter stores only customer ID and
+  subscription status), TLS with HSTS/CSP/X-Frame-Options, and an architectural inability to
+  move money.
+evidence:
+- source: https://shelter.money/security
+  status: 200
+  note: SOC 2 / ISO 27001 / HIPAA appear under "What we don't claim" — explicitly not certified

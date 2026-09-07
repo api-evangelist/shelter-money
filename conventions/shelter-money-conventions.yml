@@ -1,0 +1,46 @@
+generated: '2026-09-07'
+method: searched
+source: https://shelter.money/developers
+note: >-
+  Shelter publishes no OpenAPI; these conventions are read from the provider's developers page,
+  llms.txt, security page, and the published MCP server sources (github.com/nextauralabs/shelter-mcp).
+  The entire agent surface is read-only by design — the provider states Shelter "cannot move, hold,
+  withdraw, or spend money", every MCP tool carries readOnlyHint: true, and the two POST operations
+  (/v1/ask, /v1/affordability) are computations, not state mutations.
+authentication:
+  style: api-key
+  header: X-Shelter-Key
+  reference: authentication/shelter-money-authentication.yml
+versioning:
+  style: url-path
+  current: v1
+  evidence: All backing Agent API paths are prefixed /v1/ (src/tools/*.ts)
+idempotency:
+  coverage: na
+  note: >-
+    No write surface exists — the API is read-only (no create/update/delete operations), so an
+    idempotency mechanism is not applicable rather than absent.
+reversibility:
+  coverage: na
+  note: Read-only surface; there are no state-changing actions to reverse.
+dry_run_mode:
+  coverage: na
+  note: >-
+    Read-only surface. shelter_affordability is itself a simulation ("purchase affordability
+    simulation") but there is no mutating operation for a dry-run mode to rehearse.
+error_envelope:
+  style: fail-closed suppression
+  note: >-
+    When required money data or the API key is missing, responses carry an authority block
+    (status: suppressed, reasonCodes[], manifestId, formulaVersion) with data: null instead of
+    substituting zeros or sample values — documented in llms.txt ("suppresses the
+    forecast-dependent answer instead of treating missing values as zero") and implemented in the
+    published client.
+rate_limit_signaling:
+  documented_headers: []
+  reference: rate-limits/shelter-money-rate-limits.yml
+  note: Tier limits are published but response headers and the exhaustion status code are not documented.
+pagination:
+  style: none-documented
+metadata:
+  note: Forecast responses are manifest-bound (manifestId, formulaVersion) so an answer can be tied to the forecast version that produced it.

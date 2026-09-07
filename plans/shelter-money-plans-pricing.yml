@@ -1,0 +1,35 @@
+generated: '2026-09-07'
+method: searched
+source: https://shelter.money/pricing
+plan_count: 2
+plans:
+- name: Free (API free tier)
+  price: 0
+  currency: USD
+  billing_period: none
+  included:
+  - Agent API / MCP access at the free tier
+  limits:
+  - 10 requests/minute
+  - 100 requests/day
+  - 5 Guardian asks/day
+- name: Premium
+  price: 9.99
+  currency: USD
+  billing_period: monthly
+  alternate:
+    price: 79
+    currency: USD
+    billing_period: yearly
+  trial: 14-day web trial; card required; billing begins after the trial unless canceled
+  included:
+  - Full Shelter product (30-day forecast, safe-to-spend, alerts, Guardian chat, Telegram delivery)
+  - Premium API tier included automatically — no separate API plan
+  limits:
+  - 60 requests/minute
+  - 10,000 requests/day
+  - 100 Guardian asks/day
+note: >-
+  API access is bundled with the consumer subscription; there is no separate developer plan.
+  Prices cross-confirmed by the provider's own llms.txt (fetched 2026-09-07) and the
+  developers page (https://shelter.money/developers).
