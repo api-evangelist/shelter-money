@@ -7,6 +7,21 @@ description: >-
   server.json) backed by a scoped-API-key Agent API; the documented API host api.shelter.money was
   NXDOMAIN at probe time (2026-09-07), so the live API could not be reached.
 url: https://raw.githubusercontent.com/api-evangelist/shelter-money/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  license_evidence:
+    not_product:
+    - nextauralabs/shelter-mcp
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: low
+  source:
+  - pricing
+  - repository-not-product
+  generated: '2026-09-25'
+  method: derived
 created: '2026-09-07'
 modified: '2026-09-07'
 specificationVersion: '0.21'
