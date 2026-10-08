@@ -62,6 +62,8 @@ apis:
   - type: Conformance
     url: conformance/shelter-money-conformance.yml
 common:
+- type: RateLimits
+  url: rate-limits/shelter-money-rate-limits.yml
 - type: Website
   url: https://shelter.money
 - type: DeveloperPortal
