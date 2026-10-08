@@ -33,3 +33,23 @@ note: >-
   API access is bundled with the consumer subscription; there is no separate developer plan.
   Prices cross-confirmed by the provider's own llms.txt (fetched 2026-09-07) and the
   developers page (https://shelter.money/developers).
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - subscription
+  units: []
+  plans:
+  - name: Free (API free tier)
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Premium
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods: []
