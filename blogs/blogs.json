@@ -2,6 +2,13 @@
   "repo": "shelter-money",
   "feeds": [
     {
+      "source": "https://shelter.money/blog",
+      "feed_url": "https://shelter.money/blog",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://shelter.money/support",
       "feed_url": "https://shelter.money/support",
       "title": "",
@@ -10,5 +17,5 @@
     }
   ],
   "post_count": 0,
-  "fetched": "2026-10-03T12:30:02Z"
+  "fetched": "2026-10-10T13:15:00Z"
 }
